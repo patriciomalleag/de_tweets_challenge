@@ -1,5 +1,7 @@
 demoji==1.1.0
 memory-profiler==0.61.0
+pandas==2.2.3
 polars==1.30.0
 pytest==7.4.0
 pytest-cov==6.1.1
+regex==2024.11.6
