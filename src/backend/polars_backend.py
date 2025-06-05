@@ -28,21 +28,25 @@ def _lazy_scan(
     level indicated in `cols`.
 
     Parameters:
-        path: Path to the NDJSON file. Can be str or Path.
-        cols: List of names of the first level columns that we want to load.
-              Examples of valid names:
+        path : str | Path
+            Path to the NDJSON file. Can be str or Path.
+        cols : List[str]
+            List of names of the first level columns that we want to load.
+            Examples of valid names:
                 - "date"
                 - "user"
                 - "content"
                 - "mentionedUsers"
-              Nested expressions are not allowed here (e.g. "user.username").
-              Simply select the first level column.
+            Nested expressions are not allowed here (e.g. "user.username").
+            Simply select the first level column.
 
     Returns:
-        pl.LazyFrame with the selected columns.
+        pl.LazyFrame
+            LazyFrame with the selected columns.
 
     Raises:
-        FileNotFoundError: if the `path` does not exist.
+        FileNotFoundError
+            If the `path` does not exist.
     """
     if not Path(path).exists():
         raise FileNotFoundError(f"No such file or directory: {path!s}")
@@ -63,65 +67,69 @@ def top_active_dates(
     tweeted the most that day.
 
     Parameters:
-        path: Path to the NDJSON file.
-        n: Number of dates to return.
+        path : str | Path
+            Path to the NDJSON file.
+        n : int, default 10
+            Number of dates to return.
 
     Returns:
-        List[Tuple[date (datetime.date), username (str)]] ordered by number of
-        tweets from highest to lowest.
+        List[Tuple[date, str]]
+            List of tuples containing (date, username) ordered by number of
+            tweets from highest to lowest.
+
+    Raises:
+        FileNotFoundError
+            If the `path` does not exist.
     """
 
-    if Path(path).exists() and Path(path).stat().st_size == 0:
+    path_obj = Path(path)
+    if not path_obj.exists():
+        raise FileNotFoundError(f"No such file or directory: {path!s}")
+    if path_obj.stat().st_size == 0:
         return []
 
+    lf = pl.scan_ndjson(path_obj).select(["date", "user"])
+
     lf_base = (
-        _lazy_scan(path, ["date", "user"])
-          .filter(pl.col("date").is_not_null())
-          .filter(pl.col("user").is_not_null())
-          .with_columns(
-              pl.col("date")
-                .str.strptime(pl.Datetime, "%Y-%m-%dT%H:%M:%S%z", strict=False)
-                .dt.date()
-                .alias("dt"),
-              pl.col("user").struct.field("username").alias("username")
-          )
-          .select("dt", "username")
+        lf.with_columns(
+            pl.col("date")
+              .str.strptime(pl.Datetime, "%Y-%m-%dT%H:%M:%S%z", strict=False)
+              .dt.date()
+              .alias("dt"),
+            pl.col("user")
+              .map_elements(
+                  lambda u: u.get("username") if isinstance(u, dict) else None,
+                  return_dtype=pl.Utf8,
+              )
+              .alias("username"),
+        )
+        .filter(pl.col("dt").is_not_null() & pl.col("username").is_not_null())
+        .select("dt", "username")
     )
 
-    df_grouped = (
+    grp = (
         lf_base
-          .group_by(["dt", "username"])
-          .agg(pl.len().alias("cnt"))
-          .sort(["dt", "cnt"], descending=[False, True])
+        .group_by(["dt", "username"])
+        .agg(pl.len().alias("cnt"))
+        .sort(["dt", "cnt", "username"], descending=[False, True, False])
     )
 
-    df_top_user = (
-        df_grouped
-          .group_by("dt")
-          .first()
-          .select("dt", "username")
+    top_user = (
+        grp.group_by("dt")
+           .first()
+           .select("dt", "username")
     )
 
-    total_per_day = (
-        lf_base
-          .group_by("dt")
-          .agg(pl.len().alias("tweets_total"))
+    total_day = lf_base.group_by("dt").agg(pl.len().alias("total"))
+
+    result_df = (
+        total_day.join(top_user, on="dt", how="left")
+                 .sort("total", descending=True)
+                 .head(n)
+                 .collect()
     )
 
-    df_result = (
-        total_per_day
-          .join(df_top_user, on="dt", how="left")
-          .sort("tweets_total", descending=True)
-          .head(n)
-          .collect()
-    )
-
-    result: List[Tuple[date, str]] = []
-    for row in df_result.iter_rows(named=True):
-        date: date = row["dt"]
-        username: str = row["username"]
-        result.append((date, username))
-
+    result: List[Tuple[date, str]] = [(row["dt"], row["username"]) for row in result_df.iter_rows(named=True)]
     return result
 
 
@@ -137,12 +145,19 @@ def top_emojis(
     Returns the n most frequent emojis in the content of all tweets.
 
     Parameters:
-        path: Path to the NDJSON file.
-        n: Number of emojis to return.
+        path : str | Path
+            Path to the NDJSON file.
+        n : int, default 10
+            Number of emojis to return.
 
     Returns:
-        List[Tuple[emoji (str), frequency (int)]] ordered by frequency from
-        highest to lowest.
+        List[Tuple[str, int]]
+            List of tuples containing (emoji, frequency) ordered by frequency
+            from highest to lowest.
+
+    Raises:
+        FileNotFoundError
+            If the `path` does not exist.
     """
     lf_content = (
         _lazy_scan(path, ["content"])
@@ -170,12 +185,7 @@ def top_emojis(
           .collect()
     )
 
-    result: List[Tuple[str, int]] = []
-    for row in top_emojis_df.iter_rows(named=True):
-        emj: str = row["emoji"]
-        freq: int = row["cnt"]
-        result.append((emj, freq))
-
+    result: List[Tuple[str, int]] = [(row["emoji"], row["cnt"]) for row in top_emojis_df.iter_rows(named=True)]
     return result
 
 
@@ -197,7 +207,13 @@ def top_mentioned_users(
             Number of mentioned users to return.
 
     Returns:
-        List[Tuple[str, int]] ordered by frequency from highest to lowest.
+        List[Tuple[str, int]]
+            List of tuples containing (username, frequency) ordered by frequency
+            from highest to lowest.
+
+    Raises:
+        FileNotFoundError
+            If the `path` does not exist.
     """
     if Path(path).exists() and Path(path).stat().st_size == 0:
         return []
@@ -229,4 +245,5 @@ def top_mentioned_users(
         .collect()
     )
 
-    return [(row["username"], row["cnt"]) for row in top_df.iter_rows(named=True)]
+    result: List[Tuple[str, int]] = [(row["username"], row["cnt"]) for row in top_df.iter_rows(named=True)]
+    return result
