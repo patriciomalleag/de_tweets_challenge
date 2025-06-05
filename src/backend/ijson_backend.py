@@ -24,13 +24,16 @@ def _check_file_exists(path: Union[str, Path]) -> Path:
     Helper for checking that the file exists.
 
     Parameters:
-        path: Path to the file.
+        path : Union[str, Path]
+            Path to the file.
 
     Returns:
-        Path to the file.
+        Path
+            Path object to the file.
 
     Raises:
-        FileNotFoundError: si el fichero no existe.
+        FileNotFoundError
+            If the file does not exist.
     """
     path_obj = Path(path)
     if not path_obj.exists():
@@ -44,10 +47,12 @@ def _parse_ndjson_stream(path: Path) -> Iterator[dict]:
     with ijson.
 
     Parameters:
-        path: Path to the NDJSON file.
+        path : Path
+            Path to the NDJSON file.
 
     Returns:
-        Iterator[dict]: Un iterador de diccionarios, uno por cada línea JSON.
+        Iterator[dict]
+            Iterator of dictionaries, one for each JSON line.
     """
     with path.open("rb") as f:
         yield from ijson.items(f, "", multiple_values=True)
@@ -66,12 +71,19 @@ def top_active_dates(
     tweeted the most that day.
 
     Parameters:
-        path: Path to the NDJSON file.
-        n: Number of dates to return.
+        path : str | Path
+            Path to the NDJSON file.
+        n : int, default 10
+            Number of dates to return.
 
     Returns:
-        List[Tuple[date (datetime.date), username (str)]] ordered by number of
-        tweets from highest to lowest.
+        List[Tuple[date, str]]
+            List of tuples containing (date, username) ordered by number of
+            tweets from highest to lowest.
+
+    Raises:
+        FileNotFoundError
+            If the `path` does not exist.
     """
     path_obj = _check_file_exists(path)
     if path_obj.stat().st_size == 0:
@@ -129,12 +141,19 @@ def top_emojis(
     Returns the n most frequent emojis in the content of all tweets.
 
     Parameters:
-        path: Path to the NDJSON file.
-        n: Number of emojis to return.
+        path : str | Path
+            Path to the NDJSON file.
+        n : int, default 10
+            Number of emojis to return.
 
     Returns:
-        List[Tuple[emoji (str), frequency (int)]] ordered by frequency from
-        highest to lowest.
+        List[Tuple[str, int]]
+            List of tuples containing (emoji, frequency) ordered by frequency
+            from highest to lowest.
+
+    Raises:
+        FileNotFoundError
+            If the `path` does not exist.
     """
     path_obj = _check_file_exists(path)
     if path_obj.stat().st_size == 0:
@@ -167,11 +186,19 @@ def top_mentioned_users(
     Returns the n most mentioned users in all tweets.
 
     Parameters:
-        path: Path to the NDJSON file.
-        n: Number of mentioned users to return.
+        path : str | Path
+            Path to the NDJSON file.
+        n : int, default 10
+            Number of mentioned users to return.
 
     Returns:
-        List[Tuple[str, int]] ordered by frequency from highest to lowest.
+        List[Tuple[str, int]]
+            List of tuples containing (username, frequency) ordered by frequency
+            from highest to lowest.
+
+    Raises:
+        FileNotFoundError
+            If the `path` does not exist.
     """
     path_obj = _check_file_exists(path)
     if path_obj.stat().st_size == 0:

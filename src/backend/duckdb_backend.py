@@ -27,7 +27,8 @@ def _get_connection() -> duckdb.DuckDBPyConnection:
     mode. It is used in each main function to execute the SQL queries.
 
     Returns:
-        duckdb.DuckDBPyConnection: A connection to DuckDB in in-memory mode.
+        duckdb.DuckDBPyConnection
+            A connection to DuckDB in in-memory mode.
     """
     return duckdb.connect(database=":memory:")
 
@@ -37,10 +38,12 @@ def _check_file_exists(path: Path) -> None:
     Helper for checking that the file exists.
     
     Parameters:
-        path: Path to the file.
+        path : Path
+            Path to the file.
     
     Raises:
-        FileNotFoundError: if the file does not exist in the file system.
+        FileNotFoundError
+            If the file does not exist in the file system.
     """
     if not path.exists():
         raise FileNotFoundError(f"No such file or directory: {str(path)}")
@@ -59,34 +62,45 @@ def top_active_dates(
     tweeted the most that day.
 
     Parameters:
-        path: Path to the NDJSON file.
-        n: Number of dates to return.
+        path : str | Path
+            Path to the NDJSON file.
+        n : int, default 10
+            Number of dates to return.
 
     Returns:
-        List[Tuple[date (datetime.date), username (str)]] ordered by number of
-        tweets from highest to lowest.
+        List[Tuple[date, str]]
+            List of tuples containing (date, username) ordered by number of
+            tweets from highest to lowest.
+
+    Raises:
+        FileNotFoundError
+            If the `path` does not exist.
     """
-    path = Path(path)
-    _check_file_exists(path)
-    if path.stat().st_size == 0:
+    path_obj = Path(path)
+    _check_file_exists(path_obj)
+    if path_obj.stat().st_size == 0:
         return []
 
     con = _get_connection()
     try:
-        tabla_ndjson = f"read_ndjson('{str(path)}')"
+        tabla_ndjson = f"read_ndjson('{str(path_obj)}')"
 
         base_query = f"""
             WITH cte_base AS (
                 SELECT
-                    CAST(SUBSTR("date", 1, 10) AS DATE) AS dt,
-                    TRIM(BOTH '"' FROM JSON_EXTRACT("user", '$.username')) AS username
+                    -- TRY_CAST evita explotar con fechas malas
+                    TRY_CAST(SUBSTR("date", 1, 10) AS DATE)         AS dt,
+                    TRIM(BOTH '"' FROM JSON_EXTRACT("user",'$.username')) AS username
                 FROM {tabla_ndjson}
                 WHERE "date" IS NOT NULL
                   AND "user" IS NOT NULL
+                  AND TRY_CAST(SUBSTR("date", 1, 10) AS DATE) IS NOT NULL
+                  AND JSON_EXTRACT("user",'$.username') IS NOT NULL
+                  AND JSON_EXTRACT("user",'$.username') <> 'null'
             ),
 
             cte_total_per_day AS (
-                SELECT 
+                SELECT
                     dt,
                     COUNT(*) AS tweets_total
                 FROM cte_base
@@ -103,7 +117,7 @@ def top_active_dates(
             ),
 
             cte_top_user_per_day AS (
-                SELECT 
+                SELECT
                     dt,
                     username
                 FROM (
@@ -112,8 +126,9 @@ def top_active_dates(
                         username,
                         cnt,
                         ROW_NUMBER() OVER (
-                            PARTITION BY dt 
-                            ORDER BY cnt DESC
+                            PARTITION BY dt
+                            ORDER BY cnt DESC,
+                                     username ASC
                         ) AS rn
                     FROM cte_counts_per_user
                 ) sub
@@ -130,8 +145,8 @@ def top_active_dates(
             LIMIT {n}
         """
 
-        result = con.execute(base_query).fetchall()
-        result: List[Tuple[date, str]] = [(row[0], row[1]) for row in result]
+        fetched_data = con.execute(base_query).fetchall()
+        result: List[Tuple[date, str]] = [(row[0], row[1]) for row in fetched_data]
         return result
 
     finally:
@@ -150,23 +165,30 @@ def top_emojis(
     Returns the n most frequent emojis in the content of all tweets.
 
     Parameters:
-        path: Path to the NDJSON file.
-        n: Number of emojis to return.
+        path : str | Path
+            Path to the NDJSON file.
+        n : int, default 10
+            Number of emojis to return.
 
     Returns:
-        List[Tuple[emoji (str), frequency (int)]] ordered by frequency from
-        highest to lowest.
+        List[Tuple[str, int]]
+            List of tuples containing (emoji, frequency) ordered by frequency
+            from highest to lowest.
+
+    Raises:
+        FileNotFoundError
+            If the `path` does not exist.
     """
-    path = Path(path)
-    _check_file_exists(path)
-    if path.stat().st_size == 0:
+    path_obj = Path(path)
+    _check_file_exists(path_obj)
+    if path_obj.stat().st_size == 0:
         return []
 
     emoji_pattern = re.compile(r"\p{Extended_Pictographic}", re.UNICODE)
 
     con = _get_connection()
     try:
-        ndjson_table = f"read_ndjson('{str(path)}')"
+        ndjson_table = f"read_ndjson('{str(path_obj)}')"
         content_query = f"""
             SELECT content
             FROM {ndjson_table}
@@ -178,7 +200,7 @@ def top_emojis(
 
     counter = Counter()
     for row in result:
-        content_str: str = row[0]
+        content_str = row[0]
         found = emoji_pattern.findall(content_str)
         counter.update(found)
 
@@ -199,20 +221,28 @@ def top_mentioned_users(
     Returns the n most mentioned users in all tweets.
 
     Parameters:
-        path: Path to the NDJSON file.
-        n: Number of mentioned users to return.
+        path : str | Path
+            Path to the NDJSON file.
+        n : int, default 10
+            Number of mentioned users to return.
 
     Returns:
-        List[Tuple[str, int]] ordered by frequency from highest to lowest.
+        List[Tuple[str, int]]
+            List of tuples containing (username, frequency) ordered by frequency
+            from highest to lowest.
+
+    Raises:
+        FileNotFoundError
+            If the `path` does not exist.
     """
-    path = Path(path)
-    _check_file_exists(path)
-    if path.stat().st_size == 0:
+    path_obj = Path(path)
+    _check_file_exists(path_obj)
+    if path_obj.stat().st_size == 0:
         return []
 
     con = _get_connection()
     try:
-        ndjson_table = f"read_ndjson('{str(path)}')"
+        ndjson_table = f"read_ndjson('{str(path_obj)}')"
         mentioned_users_query = f"""
             WITH cte_exploded AS (
                 SELECT
