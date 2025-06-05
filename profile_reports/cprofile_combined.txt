@@ -1,0 +1,240 @@
+
+# ===== pandas | top_active_dates =====
+         2467880 function calls (2467239 primitive calls) in 1.977 seconds
+
+   Ordered by: cumulative time
+   List reduced from 917 to 10 due to restriction <10>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.011    0.011    1.977    1.977 /Users/patriciomallea/challenges/de_tweets_challenge/src/backend/pandas_backend.py:72(top_active_dates)
+        1    0.334    0.334    1.816    1.816 /Users/patriciomallea/challenges/de_tweets_challenge/src/backend/pandas_backend.py:24(_load_ndjson)
+   117407    0.041    0.000    1.339    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/json/__init__.py:299(loads)
+   117407    0.065    0.000    1.288    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/json/decoder.py:332(decode)
+   117407    1.185    0.000    1.185    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/json/decoder.py:343(raw_decode)
+   117407    0.039    0.000    0.045    0.000 /Users/patriciomallea/challenges/de_tweets_challenge/src/backend/pandas_backend.py:62(<dictcomp>)
+        1    0.000    0.000    0.042    0.042 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/pandas/core/tools/datetimes.py:673(to_datetime)
+        2    0.000    0.000    0.042    0.021 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/pandas/core/frame.py:694(__init__)
+        1    0.000    0.000    0.042    0.042 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/pandas/core/tools/datetimes.py:314(_convert_listlike_datetimes)
+    49772    0.011    0.000    0.041    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/codecs.py:319(decode)
+
+
+
+# ===== pandas | top_emojis =====
+         2221654 function calls (2221381 primitive calls) in 1.716 seconds
+
+   Ordered by: cumulative time
+   List reduced from 829 to 10 due to restriction <10>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.005    0.005    1.716    1.716 /Users/patriciomallea/challenges/de_tweets_challenge/src/backend/pandas_backend.py:137(top_emojis)
+        1    0.369    0.369    1.587    1.587 /Users/patriciomallea/challenges/de_tweets_challenge/src/backend/pandas_backend.py:24(_load_ndjson)
+   117407    0.042    0.000    1.107    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/json/__init__.py:299(loads)
+   117407    0.057    0.000    1.056    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/json/decoder.py:332(decode)
+   117407    0.960    0.000    0.960    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/json/decoder.py:343(raw_decode)
+        1    0.000    0.000    0.096    0.096 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/pandas/core/series.py:4789(apply)
+        1    0.000    0.000    0.096    0.096 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/pandas/core/apply.py:1409(apply)
+        1    0.000    0.000    0.096    0.096 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/pandas/core/apply.py:1482(apply_standard)
+        1    0.000    0.000    0.096    0.096 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/pandas/core/base.py:891(_map_values)
+        1    0.008    0.008    0.096    0.096 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/pandas/core/algorithms.py:1667(map_array)
+
+
+
+# ===== pandas | top_mentioned_users =====
+         2298137 function calls (2297830 primitive calls) in 1.741 seconds
+
+   Ordered by: cumulative time
+   List reduced from 829 to 10 due to restriction <10>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.005    0.005    1.741    1.741 /Users/patriciomallea/challenges/de_tweets_challenge/src/backend/pandas_backend.py:184(top_mentioned_users)
+        1    0.368    0.368    1.678    1.678 /Users/patriciomallea/challenges/de_tweets_challenge/src/backend/pandas_backend.py:24(_load_ndjson)
+   117407    0.042    0.000    1.175    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/json/__init__.py:299(loads)
+   117407    0.061    0.000    1.122    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/json/decoder.py:332(decode)
+   117407    1.021    0.000    1.021    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/json/decoder.py:343(raw_decode)
+    49772    0.012    0.000    0.043    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/codecs.py:319(decode)
+   117407    0.038    0.000    0.041    0.000 /Users/patriciomallea/challenges/de_tweets_challenge/src/backend/pandas_backend.py:62(<dictcomp>)
+        4    0.000    0.000    0.036    0.009 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/pandas/core/frame.py:694(__init__)
+        1    0.000    0.000    0.035    0.035 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/pandas/core/internals/construction.py:506(nested_data_to_arrays)
+        1    0.000    0.000    0.034    0.034 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/pandas/core/internals/construction.py:793(to_arrays)
+
+
+
+# ===== polars | top_active_dates =====
+         3417 function calls (3302 primitive calls) in 0.753 seconds
+
+   Ordered by: cumulative time
+   List reduced from 391 to 10 due to restriction <10>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.753    0.753 /Users/patriciomallea/challenges/de_tweets_challenge/src/backend/polars_backend.py:61(top_active_dates)
+        1    0.000    0.000    0.750    0.750 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/polars/_utils/deprecation.py:84(wrapper)
+        1    0.000    0.000    0.750    0.750 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/polars/lazyframe/opt_flags.py:315(wrapper)
+        1    0.000    0.000    0.750    0.750 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/polars/lazyframe/frame.py:2069(collect)
+        1    0.750    0.750    0.750    0.750 {method 'collect' of 'builtins.PyLazyFrame' objects}
+        2    0.000    0.000    0.001    0.001 <frozen importlib._bootstrap>:1022(_find_and_load)
+        1    0.000    0.000    0.001    0.001 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/polars/expr/expr.py:4518(map_elements)
+        2    0.000    0.000    0.001    0.001 <frozen importlib._bootstrap>:987(_find_and_load_unlocked)
+        2    0.000    0.000    0.001    0.001 <frozen importlib._bootstrap>:664(_load_unlocked)
+        2    0.000    0.000    0.001    0.001 <frozen importlib._bootstrap_external>:877(exec_module)
+
+
+
+# ===== polars | top_emojis =====
+         730 function calls (643 primitive calls) in 0.109 seconds
+
+   Ordered by: cumulative time
+   List reduced from 227 to 10 due to restriction <10>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.109    0.109 /Users/patriciomallea/challenges/de_tweets_challenge/src/backend/polars_backend.py:140(top_emojis)
+        1    0.000    0.000    0.107    0.107 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/polars/_utils/deprecation.py:84(wrapper)
+        1    0.000    0.000    0.107    0.107 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/polars/lazyframe/opt_flags.py:315(wrapper)
+        1    0.000    0.000    0.107    0.107 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/polars/lazyframe/frame.py:2069(collect)
+        1    0.107    0.107    0.107    0.107 {method 'collect' of 'builtins.PyLazyFrame' objects}
+        1    0.000    0.000    0.001    0.001 /Users/patriciomallea/challenges/de_tweets_challenge/src/backend/polars_backend.py:22(_lazy_scan)
+      2/1    0.000    0.000    0.001    0.001 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/polars/_utils/deprecation.py:123(wrapper)
+        1    0.000    0.000    0.001    0.001 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/polars/io/ndjson.py:199(scan_ndjson)
+        1    0.000    0.000    0.000    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/polars/io/cloud/credential_provider/_builder.py:191(_init_credential_provider_builder)
+        1    0.000    0.000    0.000    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/polars/io/cloud/credential_provider/_builder.py:200(f)
+
+
+
+# ===== polars | top_mentioned_users =====
+         314476 function calls (314366 primitive calls) in 0.354 seconds
+
+   Ordered by: cumulative time
+   List reduced from 379 to 10 due to restriction <10>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.354    0.354 /Users/patriciomallea/challenges/de_tweets_challenge/src/backend/polars_backend.py:196(top_mentioned_users)
+        1    0.000    0.000    0.351    0.351 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/polars/_utils/deprecation.py:84(wrapper)
+        1    0.000    0.000    0.351    0.351 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/polars/lazyframe/opt_flags.py:315(wrapper)
+        1    0.000    0.000    0.351    0.351 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/polars/lazyframe/frame.py:2069(collect)
+        1    0.229    0.229    0.351    0.351 {method 'collect' of 'builtins.PyLazyFrame' objects}
+        1    0.000    0.000    0.122    0.122 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/polars/expr/expr.py:4338(__call__)
+        1    0.000    0.000    0.122    0.122 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/polars/expr/expr.py:4749(wrap_f)
+        1    0.000    0.000    0.122    0.122 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/polars/series/series.py:5521(map_elements)
+        1    0.106    0.106    0.121    0.121 {method 'map_elements' of 'builtins.PySeries' objects}
+   103403    0.010    0.000    0.015    0.000 /Users/patriciomallea/challenges/de_tweets_challenge/src/backend/polars_backend.py:230(<lambda>)
+
+
+
+# ===== duckdb | top_active_dates =====
+         84 function calls (56 primitive calls) in 0.898 seconds
+
+   Ordered by: cumulative time
+   List reduced from 30 to 10 due to restriction <10>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.893    0.893    0.898    0.898 /Users/patriciomallea/challenges/de_tweets_challenge/src/backend/duckdb_backend.py:56(top_active_dates)
+        1    0.000    0.000    0.005    0.005 /Users/patriciomallea/challenges/de_tweets_challenge/src/backend/duckdb_backend.py:24(_get_connection)
+        1    0.005    0.005    0.005    0.005 {built-in method duckdb.duckdb.connect}
+        2    0.000    0.000    0.000    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/abc.py:117(__instancecheck__)
+        2    0.000    0.000    0.000    0.000 {built-in method _abc._abc_instancecheck}
+     16/2    0.000    0.000    0.000    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/abc.py:121(__subclasscheck__)
+     16/2    0.000    0.000    0.000    0.000 {built-in method _abc._abc_subclasscheck}
+        1    0.000    0.000    0.000    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/pathlib.py:957(__new__)
+        2    0.000    0.000    0.000    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/pathlib.py:1092(stat)
+        1    0.000    0.000    0.000    0.000 /Users/patriciomallea/challenges/de_tweets_challenge/src/backend/duckdb_backend.py:36(_check_file_exists)
+
+
+
+# ===== duckdb | top_emojis =====
+         704762 function calls (704734 primitive calls) in 0.646 seconds
+
+   Ordered by: cumulative time
+   List reduced from 101 to 10 due to restriction <10>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.529    0.529    0.646    0.646 /Users/patriciomallea/challenges/de_tweets_challenge/src/backend/duckdb_backend.py:160(top_emojis)
+   117407    0.066    0.000    0.066    0.000 {method 'findall' of '_regex.Pattern' objects}
+   117408    0.018    0.000    0.046    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/collections/__init__.py:640(update)
+   117432    0.009    0.000    0.022    0.000 {built-in method builtins.isinstance}
+   117409    0.007    0.000    0.012    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/abc.py:117(__instancecheck__)
+   117407    0.007    0.000    0.007    0.000 {built-in method _collections._count_elements}
+   117409    0.005    0.000    0.006    0.000 {built-in method _abc._abc_instancecheck}
+        1    0.000    0.000    0.005    0.005 /Users/patriciomallea/challenges/de_tweets_challenge/src/backend/duckdb_backend.py:24(_get_connection)
+        1    0.005    0.005    0.005    0.005 {built-in method duckdb.duckdb.connect}
+        1    0.000    0.000    0.000    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/site-packages/regex/regex.py:349(compile)
+
+
+
+# ===== duckdb | top_mentioned_users =====
+         84 function calls (56 primitive calls) in 0.403 seconds
+
+   Ordered by: cumulative time
+   List reduced from 30 to 10 due to restriction <10>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.398    0.398    0.403    0.403 /Users/patriciomallea/challenges/de_tweets_challenge/src/backend/duckdb_backend.py:216(top_mentioned_users)
+        1    0.000    0.000    0.005    0.005 /Users/patriciomallea/challenges/de_tweets_challenge/src/backend/duckdb_backend.py:24(_get_connection)
+        1    0.005    0.005    0.005    0.005 {built-in method duckdb.duckdb.connect}
+        2    0.000    0.000    0.000    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/abc.py:117(__instancecheck__)
+        2    0.000    0.000    0.000    0.000 {built-in method _abc._abc_instancecheck}
+     16/2    0.000    0.000    0.000    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/abc.py:121(__subclasscheck__)
+     16/2    0.000    0.000    0.000    0.000 {built-in method _abc._abc_subclasscheck}
+        2    0.000    0.000    0.000    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/pathlib.py:1092(stat)
+        1    0.000    0.000    0.000    0.000 /Users/patriciomallea/challenges/de_tweets_challenge/src/backend/duckdb_backend.py:36(_check_file_exists)
+        1    0.000    0.000    0.000    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/pathlib.py:1285(exists)
+
+
+
+# ===== ijson | top_active_dates =====
+         4266854 function calls (4266721 primitive calls) in 2.749 seconds
+
+   Ordered by: cumulative time
+   List reduced from 132 to 10 due to restriction <10>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.146    0.146    2.749    2.749 /Users/patriciomallea/challenges/de_tweets_challenge/src/backend/ijson_backend.py:65(top_active_dates)
+   117408    1.721    0.000    1.721    0.000 /Users/patriciomallea/challenges/de_tweets_challenge/src/backend/ijson_backend.py:44(_parse_ndjson_stream)
+   117407    0.020    0.000    0.846    0.000 {built-in method strptime}
+   117407    0.083    0.000    0.826    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/_strptime.py:565(_strptime_datetime)
+   117407    0.500    0.000    0.743    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/_strptime.py:309(_strptime)
+   117407    0.016    0.000    0.114    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/_strptime.py:26(_getlang)
+   117407    0.024    0.000    0.098    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/locale.py:587(getlocale)
+   117407    0.020    0.000    0.063    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/locale.py:479(_parse_localename)
+   117407    0.033    0.000    0.043    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/locale.py:396(normalize)
+   117407    0.036    0.000    0.036    0.000 {method 'match' of 're.Pattern' objects}
+
+
+
+# ===== ijson | top_emojis =====
+         552898 function calls (552870 primitive calls) in 1.853 seconds
+
+   Ordered by: cumulative time
+   List reduced from 122 to 10 due to restriction <10>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.043    0.043    1.853    1.853 /Users/patriciomallea/challenges/de_tweets_challenge/src/backend/ijson_backend.py:136(top_emojis)
+   117408    1.726    0.000    1.726    0.000 /Users/patriciomallea/challenges/de_tweets_challenge/src/backend/ijson_backend.py:44(_parse_ndjson_stream)
+   117407    0.064    0.000    0.064    0.000 {method 'findall' of '_regex.Pattern' objects}
+    16581    0.004    0.000    0.011    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/collections/__init__.py:640(update)
+   134024    0.004    0.000    0.007    0.000 {built-in method builtins.isinstance}
+   117416    0.005    0.000    0.005    0.000 {method 'get' of 'dict' objects}
+    16580    0.003    0.000    0.003    0.000 {built-in method _collections._count_elements}
+    16580    0.001    0.000    0.003    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/abc.py:117(__instancecheck__)
+    16580    0.001    0.000    0.001    0.000 {built-in method _abc._abc_instancecheck}
+        1    0.000    0.000    0.000    0.000 /Users/patriciomallea/challenges/de_tweets_challenge/src/backend/ijson_backend.py:22(_check_file_exists)
+
+
+
+# ===== ijson | top_mentioned_users =====
+         4554768 function calls (4554635 primitive calls) in 2.920 seconds
+
+   Ordered by: cumulative time
+   List reduced from 136 to 10 due to restriction <10>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.141    0.141    2.920    2.920 /Users/patriciomallea/challenges/de_tweets_challenge/src/backend/ijson_backend.py:181(top_mentioned_users)
+   117408    1.849    0.000    1.849    0.000 /Users/patriciomallea/challenges/de_tweets_challenge/src/backend/ijson_backend.py:44(_parse_ndjson_stream)
+   117407    0.020    0.000    0.883    0.000 {built-in method strptime}
+   117407    0.088    0.000    0.863    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/_strptime.py:565(_strptime_datetime)
+   117407    0.524    0.000    0.775    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/_strptime.py:309(_strptime)
+   117407    0.017    0.000    0.119    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/_strptime.py:26(_getlang)
+   117407    0.025    0.000    0.101    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/locale.py:587(getlocale)
+   117407    0.021    0.000    0.065    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/locale.py:479(_parse_localename)
+   117407    0.034    0.000    0.045    0.000 /Users/patriciomallea/anaconda3/envs/de_tweets_challenge/lib/python3.10/locale.py:396(normalize)
+   925277    0.041    0.000    0.041    0.000 {method 'get' of 'dict' objects}
+
+
