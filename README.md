@@ -23,8 +23,11 @@
 
 4. Luego, en el navegador del notebook, navegue hasta el archivo `src/challenge.ipynb` para ver la solución completa.  
 
+### Consideraciones
 
-**Importante:** Antes de reproducir el benchmarking con el script `run_benchmark.sh` se debe eliminar y opcionalmente respaldar el contenido de la carpeta `profile_reports/`, esto ya que se va insertando una fila en cada profiling de cada combinación funcion, backend en el archivo `master_summary.csv`. Un punto dem mejora del benchmark sería leer los promedios de tiempos y peaks de memoria cuando se realicen muchas ejecuciones de este, o que se almacenara una marca temporal y escoger solo la primera/última última ejecución en el notebook de benchmark.
+**Gitflow:** Un detalle respecto a la estrategia de branching es que omití la rama development, debido a que al ser un challenge, estoy trabajando solo en el repositorio, por lo que para evitar estar haciendo doble merge despues de cada feature, envío estos directo a main.
+
+**Importante:** Antes de reproducir el benchmarking con el script `run_benchmark.sh` se debe eliminar y opcionalmente respaldar el contenido de la carpeta `profile_reports/`, esto ya que se va insertando una fila en cada profiling de cada combinación funcion, backend en el archivo `master_summary.csv` de manera acumulativa. Un punto dem mejora del benchmark sería leer los promedios de tiempos y peaks de memoria cuando se realicen muchas ejecuciones de este, o que se almacenara una marca temporal y escoger solo la primera/última última ejecución en el notebook de benchmark.
 
 ​
 ## Descripción General
